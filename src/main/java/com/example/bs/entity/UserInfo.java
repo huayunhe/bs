@@ -80,18 +80,4 @@ public class UserInfo {
     public void setUserCode(String userCode) {
         this.userCode = userCode == null ? null : userCode.trim();
     }
-
-    @Override
-    public String toString() {
-        return "UserInfo{" +
-                "userId=" + userId +
-                ", userName='" + userName + '\'' +
-                ", userPhone='" + userPhone + '\'' +
-                ", userPassword='" + userPassword + '\'' +
-                ", userCard='" + userCard + '\'' +
-                ", userAddr='" + userAddr + '\'' +
-                ", userAddrDetail='" + userAddrDetail + '\'' +
-                ", userCode='" + userCode + '\'' +
-                '}';
-    }
 }

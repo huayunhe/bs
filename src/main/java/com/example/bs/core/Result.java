@@ -1,6 +1,6 @@
 package com.example.bs.core;
 
-public class LoginResult {
+public class Result {
     private int code;
     private String msg;
     private Object data;

@@ -1,5 +1,5 @@
 package com.example.bs.controller;
-import com.example.bs.core.LoginResult;
+import com.example.bs.core.Result;
 import com.example.bs.entity.UserInfo;
 import com.example.bs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +14,8 @@ public class UserController {
 
     @GetMapping("/login")
     @ResponseBody
-    public LoginResult login(@RequestParam("userName") String userName, @RequestParam("userPassword") String userPassword) {
-        LoginResult result = new LoginResult();
+    public Result login(@RequestParam("userName") String userName, @RequestParam("userPassword") String userPassword) {
+        Result result = new Result();
         UserInfo exsitUser = userService.selectUserByName(userName);
         if (exsitUser == null) {
             result.setMsg("该用户未注册");

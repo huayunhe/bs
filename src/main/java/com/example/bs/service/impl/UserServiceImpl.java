@@ -13,11 +13,7 @@ public class UserServiceImpl implements UserService {
     private UserInfoMapper userInfoMapper;
 
     @Override
-    public UserInfo login(UserInfo userInfo) {
-        UserInfo userInfo = userMapper.loadUserByUsername(username);
-        if (user == null){
-            throw new UsernameNotFoundException("用户名不存在！");
-        }
-        return user;
+    public UserInfo selectUserByName(String userName){
+        return userInfoMapper.selectUserByName(userName);
     }
 }

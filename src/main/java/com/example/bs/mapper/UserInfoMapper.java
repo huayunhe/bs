@@ -1,8 +1,9 @@
 package com.example.bs.mapper;
 
 import com.example.bs.entity.UserInfo;
+import org.apache.ibatis.annotations.Mapper;
 
-
+@Mapper
 public interface UserInfoMapper {
     int deleteByPrimaryKey(Integer userId);
 
@@ -16,6 +17,6 @@ public interface UserInfoMapper {
 
     int updateByPrimaryKey(UserInfo row);
 
-    UserInfo login(UserInfo userInfo);
-
+    /*根据用户名查找用户信息*/
+    UserInfo selectUserByName(String userName);
 }

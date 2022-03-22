@@ -1,0 +1,6 @@
+com\example\bs\core\Result.class
+com\example\bs\mapper\VideoMapper.class
+com\example\bs\service\UserService.class
+com\example\bs\BsApplication.class
+com\example\bs\entity\UserInfo.class
+com\example\bs\entity\Video.class

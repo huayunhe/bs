@@ -6,10 +6,12 @@ spring:
     password: bgman365491YZX#
 
 mybatis:
-  type-aliases-package: com.example.bs.entity
+  type-aliases-packages:
+    - com.example.bs.entity
+    - com.example.bs.core
   mapper-locations: classpath:mapper/*xml
   configuration:
     map-underscore-to-camel-case: true
 
 server:
-  port: 8085
+  port: 8087

@@ -7,6 +7,20 @@
     <result column="camera_nember" jdbcType="INTEGER" property="cameraNember" />
     <result column="video_id" jdbcType="INTEGER" property="videoId" />
   </resultMap>
+
+  <resultMap id="CameraToVideoMap" type="com.example.bs.core.CameraToVideo">
+    <id column="camera_id" jdbcType="INTEGER" property="cameraId" />
+    <result column="camera_adder" jdbcType="VARCHAR" property="cameraAdder" />
+    <result column="camera_nember" jdbcType="INTEGER" property="cameraNember" />
+    <result column="video_id" jdbcType="INTEGER" property="videoId" />
+    <result column="video_name" jdbcType="VARCHAR" property="videoName" />
+    <result column="video_url" jdbcType="VARCHAR" property="videoURL" />
+  </resultMap>
+
+  <sql id="CameraToVideo_List">
+    camera_id, camera_adder, camera_nember, video_id, video_name, video_url
+  </sql>
+
   <sql id="Base_Column_List">
     camera_id, camera_adder, camera_nember, video_id
   </sql>
@@ -79,4 +93,10 @@
       video_id = #{videoId,jdbcType=INTEGER}
     where camera_id = #{cameraId,jdbcType=INTEGER}
   </update>
+
+  <select id="selectCameraToVideoAll" resultMap="CameraToVideoMap">
+    select
+    a.camera_id, a.camera_adder, a.camera_number, b.video_id, b.video_name, b.video_url
+    from camera a, video b where a.video_id=b.video_id
+  </select>
 </mapper>

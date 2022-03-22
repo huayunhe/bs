@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.bs.mapper.UserInfoMapper">
+  <resultMap id="BaseResultMap" type="com.example.bs.entity.UserInfo">
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_phone" jdbcType="CHAR" property="userPhone" />
+    <result column="user_password" jdbcType="VARCHAR" property="userPassword" />
+    <result column="user_card" jdbcType="CHAR" property="userCard" />
+    <result column="user_addr" jdbcType="VARCHAR" property="userAddr" />
+    <result column="user_addr_detail" jdbcType="VARCHAR" property="userAddrDetail" />
+    <result column="user_code" jdbcType="CHAR" property="userCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id, user_name, user_phone, user_password, user_card, user_addr, user_addr_detail, 
+    user_code
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_info
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_info
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.bs.entity.UserInfo">
+    insert into user_info (user_id, user_name, user_phone, 
+      user_password, user_card, user_addr, 
+      user_addr_detail, user_code)
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userPhone,jdbcType=CHAR}, 
+      #{userPassword,jdbcType=VARCHAR}, #{userCard,jdbcType=CHAR}, #{userAddr,jdbcType=VARCHAR}, 
+      #{userAddrDetail,jdbcType=VARCHAR}, #{userCode,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.bs.entity.UserInfo">
+    insert into user_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="userPhone != null">
+        user_phone,
+      </if>
+      <if test="userPassword != null">
+        user_password,
+      </if>
+      <if test="userCard != null">
+        user_card,
+      </if>
+      <if test="userAddr != null">
+        user_addr,
+      </if>
+      <if test="userAddrDetail != null">
+        user_addr_detail,
+      </if>
+      <if test="userCode != null">
+        user_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        #{userPhone,jdbcType=CHAR},
+      </if>
+      <if test="userPassword != null">
+        #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userCard != null">
+        #{userCard,jdbcType=CHAR},
+      </if>
+      <if test="userAddr != null">
+        #{userAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddrDetail != null">
+        #{userAddrDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null">
+        #{userCode,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.bs.entity.UserInfo">
+    update user_info
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        user_phone = #{userPhone,jdbcType=CHAR},
+      </if>
+      <if test="userPassword != null">
+        user_password = #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userCard != null">
+        user_card = #{userCard,jdbcType=CHAR},
+      </if>
+      <if test="userAddr != null">
+        user_addr = #{userAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddrDetail != null">
+        user_addr_detail = #{userAddrDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null">
+        user_code = #{userCode,jdbcType=CHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.bs.entity.UserInfo">
+    update user_info
+    set user_name = #{userName,jdbcType=VARCHAR},
+      user_phone = #{userPhone,jdbcType=CHAR},
+      user_password = #{userPassword,jdbcType=VARCHAR},
+      user_card = #{userCard,jdbcType=CHAR},
+      user_addr = #{userAddr,jdbcType=VARCHAR},
+      user_addr_detail = #{userAddrDetail,jdbcType=VARCHAR},
+      user_code = #{userCode,jdbcType=CHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.bs.mapper.UserRoleMapper">
+  <resultMap id="BaseResultMap" type="com.example.bs.entity.UserRole">
+    <id column="role_id" jdbcType="INTEGER" property="roleId" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    role_id, role_name, description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_role
+    where role_id = #{roleId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_role
+    where role_id = #{roleId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.bs.entity.UserRole">
+    insert into user_role (role_id, role_name, description
+      )
+    values (#{roleId,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.bs.entity.UserRole">
+    insert into user_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="roleName != null">
+        role_name,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="roleName != null">
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.bs.entity.UserRole">
+    update user_role
+    <set>
+      <if test="roleName != null">
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where role_id = #{roleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.bs.entity.UserRole">
+    update user_role
+    set role_name = #{roleName,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR}
+    where role_id = #{roleId,jdbcType=INTEGER}
+  </update>
+</mapper>

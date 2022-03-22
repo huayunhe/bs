@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.bs.mapper.CameraMapper">
+  <resultMap id="BaseResultMap" type="com.example.bs.entity.Camera">
+    <id column="camera_id" jdbcType="INTEGER" property="cameraId" />
+    <result column="camera_adder" jdbcType="VARCHAR" property="cameraAdder" />
+    <result column="camera_nember" jdbcType="INTEGER" property="cameraNember" />
+    <result column="video_id" jdbcType="INTEGER" property="videoId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    camera_id, camera_adder, camera_nember, video_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from camera
+    where camera_id = #{cameraId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from camera
+    where camera_id = #{cameraId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.bs.entity.Camera">
+    insert into camera (camera_id, camera_adder, camera_nember, 
+      video_id)
+    values (#{cameraId,jdbcType=INTEGER}, #{cameraAdder,jdbcType=VARCHAR}, #{cameraNember,jdbcType=INTEGER}, 
+      #{videoId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.bs.entity.Camera">
+    insert into camera
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cameraId != null">
+        camera_id,
+      </if>
+      <if test="cameraAdder != null">
+        camera_adder,
+      </if>
+      <if test="cameraNember != null">
+        camera_nember,
+      </if>
+      <if test="videoId != null">
+        video_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cameraId != null">
+        #{cameraId,jdbcType=INTEGER},
+      </if>
+      <if test="cameraAdder != null">
+        #{cameraAdder,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraNember != null">
+        #{cameraNember,jdbcType=INTEGER},
+      </if>
+      <if test="videoId != null">
+        #{videoId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.bs.entity.Camera">
+    update camera
+    <set>
+      <if test="cameraAdder != null">
+        camera_adder = #{cameraAdder,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraNember != null">
+        camera_nember = #{cameraNember,jdbcType=INTEGER},
+      </if>
+      <if test="videoId != null">
+        video_id = #{videoId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where camera_id = #{cameraId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.bs.entity.Camera">
+    update camera
+    set camera_adder = #{cameraAdder,jdbcType=VARCHAR},
+      camera_nember = #{cameraNember,jdbcType=INTEGER},
+      video_id = #{videoId,jdbcType=INTEGER}
+    where camera_id = #{cameraId,jdbcType=INTEGER}
+  </update>
+</mapper>

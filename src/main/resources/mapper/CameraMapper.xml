@@ -4,28 +4,28 @@
   <resultMap id="BaseResultMap" type="com.example.bs.entity.Camera">
     <id column="camera_id" jdbcType="INTEGER" property="cameraId" />
     <result column="camera_adder" jdbcType="VARCHAR" property="cameraAdder" />
-    <result column="camera_nember" jdbcType="INTEGER" property="cameraNember" />
+    <result column="camera_number" jdbcType="INTEGER" property="cameraNumber" />
     <result column="video_id" jdbcType="INTEGER" property="videoId" />
   </resultMap>
 
   <resultMap id="CameraToVideoMap" type="com.example.bs.core.CameraToVideo">
     <id column="camera_id" jdbcType="INTEGER" property="cameraId" />
     <result column="camera_adder" jdbcType="VARCHAR" property="cameraAdder" />
-    <result column="camera_nember" jdbcType="INTEGER" property="cameraNember" />
+    <result column="camera_number" jdbcType="INTEGER" property="cameraNumber" />
     <result column="video_id" jdbcType="INTEGER" property="videoId" />
     <result column="video_name" jdbcType="VARCHAR" property="videoName" />
-    <result column="video_url" jdbcType="VARCHAR" property="videoURL" />
+    <result column="video_url" jdbcType="VARCHAR" property="videoUrl" />
   </resultMap>
 
   <sql id="CameraToVideo_List">
-    camera_id, camera_adder, camera_nember, video_id, video_name, video_url
+    camera_id, camera_adder, camera_number, video_id, video_name, video_url
   </sql>
 
   <sql id="Base_Column_List">
-    camera_id, camera_adder, camera_nember, video_id
+    camera_id, camera_adder, camera_number, video_id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from camera
     where camera_id = #{cameraId,jdbcType=INTEGER}
@@ -35,9 +35,9 @@
     where camera_id = #{cameraId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.example.bs.entity.Camera">
-    insert into camera (camera_id, camera_adder, camera_nember, 
+    insert into camera (camera_id, camera_adder, camera_number,
       video_id)
-    values (#{cameraId,jdbcType=INTEGER}, #{cameraAdder,jdbcType=VARCHAR}, #{cameraNember,jdbcType=INTEGER}, 
+    values (#{cameraId,jdbcType=INTEGER}, #{cameraAdder,jdbcType=VARCHAR}, #{cameraNumber,jdbcType=INTEGER},
       #{videoId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.example.bs.entity.Camera">
@@ -49,8 +49,8 @@
       <if test="cameraAdder != null">
         camera_adder,
       </if>
-      <if test="cameraNember != null">
-        camera_nember,
+      <if test="cameraNumber != null">
+        camera_number,
       </if>
       <if test="videoId != null">
         video_id,
@@ -63,8 +63,8 @@
       <if test="cameraAdder != null">
         #{cameraAdder,jdbcType=VARCHAR},
       </if>
-      <if test="cameraNember != null">
-        #{cameraNember,jdbcType=INTEGER},
+      <if test="cameraNumber != null">
+        #{cameraNumber,jdbcType=INTEGER},
       </if>
       <if test="videoId != null">
         #{videoId,jdbcType=INTEGER},
@@ -77,8 +77,8 @@
       <if test="cameraAdder != null">
         camera_adder = #{cameraAdder,jdbcType=VARCHAR},
       </if>
-      <if test="cameraNember != null">
-        camera_nember = #{cameraNember,jdbcType=INTEGER},
+      <if test="cameraNumber != null">
+        camera_number = #{cameraNumber,jdbcType=INTEGER},
       </if>
       <if test="videoId != null">
         video_id = #{videoId,jdbcType=INTEGER},
@@ -89,7 +89,7 @@
   <update id="updateByPrimaryKey" parameterType="com.example.bs.entity.Camera">
     update camera
     set camera_adder = #{cameraAdder,jdbcType=VARCHAR},
-      camera_nember = #{cameraNember,jdbcType=INTEGER},
+      camera_number = #{cameraNumber,jdbcType=INTEGER},
       video_id = #{videoId,jdbcType=INTEGER}
     where camera_id = #{cameraId,jdbcType=INTEGER}
   </update>

@@ -1,9 +1,7 @@
 package com.example.bs.controller;
-import com.example.bs.core.Result;
-import com.example.bs.core.UserBaseInfoView;
-import com.example.bs.core.UserSearch2View;
-import com.example.bs.core.UserSearchView;
+import com.example.bs.core.*;
 import com.example.bs.entity.UserInfo;
+import com.example.bs.service.UserLoginService;
 import com.example.bs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,25 +14,23 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    UserLoginService userLoginService;
 
     @GetMapping("/login")
     @ResponseBody
-    public Result login(@RequestParam("userName") String userName, @RequestParam("userPassword") String userPassword) {
+    public Result login(@RequestParam("userPhone") String userPhone, @RequestParam("userPassword") String userPassword) {
         Result result = new Result();
-        UserInfo exsitUser = userService.selectUserByName(userName);
-        if (exsitUser == null) {
-            result.setMsg("该用户未注册");
+        try {
+            UserLoginView re = userLoginService.userLogin(userPhone,userPassword);
+            result.setData(re);
+            result.setCode(200);
+            return result;
+        } catch (Exception e){
+            result.setMsg(e.getMessage());
             result.setCode(400);
             return result;
         }
-        if (!exsitUser.getUserPassword().equals(userPassword)) {
-            result.setMsg("密码错误,请重新输入");
-            result.setCode(400);
-            return result;
-        }
-        result.setCode(200);
-        result.setMsg("登录成功");
-        return result;
     }
 
     @RequestMapping(value = "/add",method = RequestMethod.POST)

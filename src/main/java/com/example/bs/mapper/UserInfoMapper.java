@@ -21,7 +21,7 @@ public interface UserInfoMapper {
 
     int updateByPrimaryKey(UserInfo row);
 
-    UserInfo selectUserByName(String userName);
+    UserInfo selectUserByPhone(String userPhone);
 
     List<UserBaseInfoView> listAll(UserSearch2View userSearch2View);
 }

@@ -19,9 +19,9 @@ public class UserLoginServiceImpl implements UserLoginService{
     private UserRoleInfoRelationMapper userRoleInfoRelationMapper;
 
     @Override
-    public UserLoginView userLogin(String userName, String userPassword) throws Exception{
+    public UserLoginView userLogin(String userPhone, String userPassword) throws Exception{
         UserInfo userInfo = new UserInfo();
-        userInfo = userInfoMapper.selectUserByName(userName);
+        userInfo = userInfoMapper.selectUserByPhone(userPhone);
         UserRoleInfoRelation userRoleInfoRelation = userRoleInfoRelationMapper.selectByUserId(userInfo.getUserId());
         UserLoginView userLoginView = new UserLoginView();
         userLoginView.setUserId(userInfo.getUserId());

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ty.demo.mapper.UserMapper">
-    <select id="listAllRepairUser" resultType="com.ty.demo.dto.UserSearchView">
+    <select id="listAllRepairUser" resultType="com.example.bs.core.UserSearchView">
         select a.user_id userId,b.user_name userName
         from user_role_info_relation as a, user_info as b
         where a.role_id = 3 and a.user_id = b.user_id
     </select>
 
-    <select id="listAllCheckUser" resultType="com.ty.demo.dto.UserSearchView">
+    <select id="listAllCheckUser" resultType="com.example.bs.core.UserSearchView">
         select a.user_id userId,b.user_name userName
         from user_role_info_relation as a, user_info as b
         where a.role_id = 2 and a.user_id = b.user_id
     </select>
 
-    <select id="listAllUsersWithRole" resultType="com.ty.demo.dto.UserSearchView">
+    <select id="listAllUsersWithRole" resultType="com.example.bs.core.UserSearchView">
         select a.user_id userId,a.user_name userName,f.role_id userRoleId,f.role_name userRoleName
         from user_info as a
         left join (

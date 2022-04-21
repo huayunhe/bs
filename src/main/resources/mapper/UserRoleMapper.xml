@@ -68,4 +68,9 @@
       description = #{description,jdbcType=VARCHAR}
     where role_id = #{roleId,jdbcType=INTEGER}
   </update>
+  <select id="listAllRoles" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user_role
+  </select>
 </mapper>

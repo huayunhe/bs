@@ -8,7 +8,7 @@ import com.example.bs.entity.UserInfo;
 import java.util.List;
 
 public interface UserService {
-    UserInfo selectUserByName(String userName);
+    UserInfo selectUserByPhone(String userPhone);
 
     int addUser(UserInfo userInfo) throws Exception;
     int delUser(Integer userId) throws Exception;

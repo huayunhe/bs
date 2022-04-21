@@ -22,8 +22,8 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;                      //包含UserInfoMapper
 
     @Override
-    public UserInfo selectUserByName(String userName){
-        return userInfoMapper.selectUserByName(userName);
+    public UserInfo selectUserByPhone(String userPhone){
+        return userInfoMapper.selectUserByPhone(userPhone);
     }
 
 

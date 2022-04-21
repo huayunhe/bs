@@ -1,8 +1,11 @@
 package com.example.bs.mapper;
 
+import com.example.bs.core.UserBaseInfoView;
+import com.example.bs.core.UserSearch2View;
 import com.example.bs.entity.UserInfo;
-import org.apache.catalina.User;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 @Mapper
 public interface UserInfoMapper {
@@ -19,4 +22,6 @@ public interface UserInfoMapper {
     int updateByPrimaryKey(UserInfo row);
 
     UserInfo selectUserByName(String userName);
+
+    List<UserBaseInfoView> listAll(UserSearch2View userSearch2View);
 }

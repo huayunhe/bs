@@ -133,4 +133,23 @@
     from user_info
     where user_name = #{userName, jdbcType=VARCHAR}
   </select>
+  <select id="listAll" resultMap="UserBaseMap" parameterType="com.ty.demo.dto.UserSearch2View">
+    select
+    user_id, user_name, user_phone, user_card, user_addr, user_addr_detail, user_code
+    from user_info
+    <where>
+      <if test="userInput != null and userInput != ''">
+        (user_id = #{userInput} or user_name like "%"#{userInput}"%")
+      </if>
+      <if test="phoneInput != null and phoneInput != ''">
+        and user_phone = #{phoneInput}
+      </if>
+      <if test="cardInput != null and cardInput != ''">
+        and user_card = #{cardInput}
+      </if>
+      <if test="addrInput != null and addrInput != ''">
+        and (user_addr = #{addrInput} or user_addr_detail like "%"#{addrInput}"%")
+      </if>
+    </where>
+  </select>
 </mapper>

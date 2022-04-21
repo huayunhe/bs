@@ -1,7 +1,10 @@
 package com.example.bs.mapper;
 
 import com.example.bs.entity.UserRoleInfoRelation;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface UserRoleInfoRelationMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +17,7 @@ public interface UserRoleInfoRelationMapper {
     int updateByPrimaryKeySelective(UserRoleInfoRelation row);
 
     int updateByPrimaryKey(UserRoleInfoRelation row);
+
+    UserRoleInfoRelation selectByTwoId(@Param("userId") Integer userId, @Param("roleId") Integer roleId);
+    UserRoleInfoRelation selectByUserId(@Param("userId") Integer userId);
 }

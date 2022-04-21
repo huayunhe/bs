@@ -1,7 +1,11 @@
 package com.example.bs.mapper;
 
 import com.example.bs.entity.UserRole;
+import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
+@Mapper
 public interface UserRoleMapper {
     int deleteByPrimaryKey(Integer roleId);
 
@@ -14,4 +18,6 @@ public interface UserRoleMapper {
     int updateByPrimaryKeySelective(UserRole row);
 
     int updateByPrimaryKey(UserRole row);
+
+    List<UserRole> listAllRoles();
 }

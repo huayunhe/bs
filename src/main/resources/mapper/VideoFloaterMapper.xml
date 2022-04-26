@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.bs.mapper.VideoFloaterMapper">
+  <resultMap id="BaseResultMap" type="com.example.bs.entity.VideoFloater">
+    <id column="video_floater_id" jdbcType="INTEGER" property="videoFloaterId" />
+    <result column="video_floater_url" jdbcType="VARCHAR" property="videoFloaterUrl" />
+    <result column="camera_id" jdbcType="INTEGER" property="cameraId" />
+  </resultMap>
+  <resultMap id="VideoFloaterToCameraMap" type="com.example.bs.core.VideoFloaterToCamera">
+    <id column="video_floater_id" jdbcType="INTEGER" property="videoFloaterId" />
+    <result column="video_floater_url" jdbcType="VARCHAR" property="videoFloaterUrl" />
+    <result column="camera_id" jdbcType="INTEGER" property="cameraId" />
+    <result column="camera_adder" jdbcType="VARCHAR" property="cameraAdder" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    video_floater_id, video_floater_url, camera_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from video_floater
+    where video_floater_id = #{videoFloaterId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from video_floater
+    where video_floater_id = #{videoFloaterId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.bs.entity.VideoFloater">
+    insert into video_floater (video_floater_id, video_floater_url, 
+      camera_id)
+    values (#{videoFloaterId,jdbcType=INTEGER}, #{videoFloaterUrl,jdbcType=VARCHAR}, 
+      #{cameraId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.bs.entity.VideoFloater">
+    insert into video_floater
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="videoFloaterId != null">
+        video_floater_id,
+      </if>
+      <if test="videoFloaterUrl != null">
+        video_floater_url,
+      </if>
+      <if test="cameraId != null">
+        camera_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="videoFloaterId != null">
+        #{videoFloaterId,jdbcType=INTEGER},
+      </if>
+      <if test="videoFloaterUrl != null">
+        #{videoFloaterUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraId != null">
+        #{cameraId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.bs.entity.VideoFloater">
+    update video_floater
+    <set>
+      <if test="videoFloaterUrl != null">
+        video_floater_url = #{videoFloaterUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraId != null">
+        camera_id = #{cameraId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where video_floater_id = #{videoFloaterId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.bs.entity.VideoFloater">
+    update video_floater
+    set video_floater_url = #{videoFloaterUrl,jdbcType=VARCHAR},
+      camera_id = #{cameraId,jdbcType=INTEGER}
+    where video_floater_id = #{videoFloaterId,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectAll" resultMap="VideoFloaterToCameraMap">
+    select
+    a.video_floater_id, a.video_floater_url, a.camera_id, b.camera_adder
+    from video_floater a, camera b where a.camera_id=b.camera_id
+  </select>
+</mapper>

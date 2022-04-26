@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.bs.mapper.VideoWaterLevelMapper">
+  <resultMap id="BaseResultMap" type="com.example.bs.entity.VideoWaterLevel">
+    <id column="video_id" jdbcType="INTEGER" property="videoId" />
+    <result column="video_url" jdbcType="VARCHAR" property="videoUrl" />
+    <result column="camera_id" jdbcType="INTEGER" property="cameraId" />
+    <result column="ruler_id" jdbcType="INTEGER" property="rulerId" />
+  </resultMap>
+  <resultMap id="VideoWaterLevelToCameraAndRulerMap" type="com.example.bs.core.VideoWaterLevelToCameraAndRuler">
+    <id column="video_id" jdbcType="INTEGER" property="videoId" />
+    <result column="video_url" jdbcType="VARCHAR" property="videoUrl" />
+    <result column="camera_id" jdbcType="INTEGER" property="cameraId" />
+    <result column="ruler_id" jdbcType="INTEGER" property="rulerId" />
+    <result column="camera_adder" jdbcType="VARCHAR" property="cameraAdder" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    video_id, video_url, camera_id, ruler_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from video_water_level
+    where video_id = #{videoId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from video_water_level
+    where video_id = #{videoId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.bs.entity.VideoWaterLevel">
+    insert into video_water_level (video_id, video_url, camera_id, 
+      ruler_id)
+    values (#{videoId,jdbcType=INTEGER}, #{videoUrl,jdbcType=VARCHAR}, #{cameraId,jdbcType=INTEGER}, 
+      #{rulerId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.bs.entity.VideoWaterLevel">
+    insert into video_water_level
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="videoId != null">
+        video_id,
+      </if>
+      <if test="videoUrl != null">
+        video_url,
+      </if>
+      <if test="cameraId != null">
+        camera_id,
+      </if>
+      <if test="rulerId != null">
+        ruler_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="videoId != null">
+        #{videoId,jdbcType=INTEGER},
+      </if>
+      <if test="videoUrl != null">
+        #{videoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraId != null">
+        #{cameraId,jdbcType=INTEGER},
+      </if>
+      <if test="rulerId != null">
+        #{rulerId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.bs.entity.VideoWaterLevel">
+    update video_water_level
+    <set>
+      <if test="videoUrl != null">
+        video_url = #{videoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraId != null">
+        camera_id = #{cameraId,jdbcType=INTEGER},
+      </if>
+      <if test="rulerId != null">
+        ruler_id = #{rulerId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where video_id = #{videoId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.bs.entity.VideoWaterLevel">
+    update video_water_level
+    set video_url = #{videoUrl,jdbcType=VARCHAR},
+      camera_id = #{cameraId,jdbcType=INTEGER},
+      ruler_id = #{rulerId,jdbcType=INTEGER}
+    where video_id = #{videoId,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectAll" resultMap="VideoWaterLevelToCameraAndRulerMap">
+    select
+    a.video_id, a.video_url, a.camera_id, a.ruler_id, b.camera_adder
+    from video_water_level a, camera b where a.camera_id=b.camera_id
+  </select>
+</mapper>

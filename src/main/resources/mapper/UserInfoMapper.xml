@@ -11,6 +11,16 @@
     <result column="user_addr_detail" jdbcType="VARCHAR" property="userAddrDetail" />
     <result column="user_code" jdbcType="CHAR" property="userCode" />
   </resultMap>
+  <resultMap id="UserBaseMap" type="com.example.bs.core.UserBaseInfoView">
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_phone" jdbcType="CHAR" property="userPhone" />
+    <result column="user_card" jdbcType="CHAR" property="userCard" />
+    <result column="user_addr" jdbcType="VARCHAR" property="userAddr" />
+    <result column="user_addr_detail" jdbcType="VARCHAR" property="userAddrDetail" />
+    <result column="user_code" jdbcType="CHAR" property="userCode" />
+  </resultMap>
+
   <sql id="Base_Column_List">
     user_id, user_name, user_phone, user_password, user_card, user_addr, user_addr_detail, 
     user_code
@@ -131,7 +141,7 @@
     select
     <include refid="Base_Column_List" />
     from user_info
-    where user_phone = {userPhone, jdbcType=VARCHAR}
+    where user_phone = #{userPhone, jdbcType=CHAR}
   </select>
   <select id="listAll" resultMap="UserBaseMap" parameterType="com.example.bs.core.UserSearch2View">
     select

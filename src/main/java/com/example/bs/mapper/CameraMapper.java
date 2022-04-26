@@ -1,6 +1,5 @@
 package com.example.bs.mapper;
 
-import com.example.bs.core.CameraToVideo;
 import com.example.bs.entity.Camera;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -20,5 +19,5 @@ public interface CameraMapper {
 
     int updateByPrimaryKey(Camera row);
 
-    List<CameraToVideo> selectCameraToVideoAll();
+    List<Camera> selectCameraAll();
 }

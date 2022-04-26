@@ -5,9 +5,7 @@ public class Camera {
 
     private String cameraAdder;
 
-    private Integer cameraNumber;
-
-    private Integer videoId;
+    private Boolean cameraType;
 
     public Integer getCameraId() {
         return cameraId;
@@ -25,19 +23,11 @@ public class Camera {
         this.cameraAdder = cameraAdder == null ? null : cameraAdder.trim();
     }
 
-    public Integer getCameraNumber() {
-        return cameraNumber;
+    public Boolean getCameraType() {
+        return cameraType;
     }
 
-    public void setCameraNumber(Integer cameraNumber) {
-        this.cameraNumber = cameraNumber;
-    }
-
-    public Integer getVideoId() {
-        return videoId;
-    }
-
-    public void setVideoId(Integer videoId) {
-        this.videoId = videoId;
+    public void setCameraType(Boolean cameraType) {
+        this.cameraType = cameraType;
     }
 }

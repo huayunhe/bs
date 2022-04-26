@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class UserRoleInfoRelationImpl implements UserRoleInfoRelationService {
+public class UserRoleInfoRelationServiceImpl implements UserRoleInfoRelationService {
     @Autowired
     UserRoleInfoRelationMapper userRoleInfoRelationMapper;
 

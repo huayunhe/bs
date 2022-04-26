@@ -1,9 +1,9 @@
 package com.example.bs.service;
 
-import com.example.bs.core.CameraToVideo;
+import com.example.bs.entity.Camera;
 
 import java.util.List;
 
 public interface CameraService {
-    List<CameraToVideo> selectCameraToVideoAll();
+    List<Camera> selectCameraAll();
 }

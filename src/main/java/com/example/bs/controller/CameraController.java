@@ -1,7 +1,7 @@
 package com.example.bs.controller;
 
-import com.example.bs.core.CameraToVideo;
 import com.example.bs.core.Result;
+import com.example.bs.entity.Camera;
 import com.example.bs.service.CameraService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,12 +15,12 @@ public class CameraController {
     @Autowired
     private CameraService cameraService;
 
-    @GetMapping("/selectCameraToVideoAll")
+    @GetMapping("/selectCameraAll")
     @ResponseBody
-    public Result selectCameraToVideoAll(){
+    public Result selectCameraAll(){
         Result result = new Result();
-        List<CameraToVideo> existCameraToVideos=cameraService.selectCameraToVideoAll();
-        result.setData(existCameraToVideos);
+        List<Camera> existCameras=cameraService.selectCameraAll();
+        result.setData(existCameras);
         return result;
     }
 

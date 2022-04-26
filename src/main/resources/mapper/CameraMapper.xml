@@ -4,28 +4,13 @@
   <resultMap id="BaseResultMap" type="com.example.bs.entity.Camera">
     <id column="camera_id" jdbcType="INTEGER" property="cameraId" />
     <result column="camera_adder" jdbcType="VARCHAR" property="cameraAdder" />
-    <result column="camera_number" jdbcType="INTEGER" property="cameraNumber" />
-    <result column="video_id" jdbcType="INTEGER" property="videoId" />
+    <result column="camera_type" jdbcType="BIT" property="cameraType" />
   </resultMap>
-
-  <resultMap id="CameraToVideoMap" type="com.example.bs.core.CameraToVideo">
-    <id column="camera_id" jdbcType="INTEGER" property="cameraId" />
-    <result column="camera_adder" jdbcType="VARCHAR" property="cameraAdder" />
-    <result column="camera_number" jdbcType="INTEGER" property="cameraNumber" />
-    <result column="video_id" jdbcType="INTEGER" property="videoId" />
-    <result column="video_name" jdbcType="VARCHAR" property="videoName" />
-    <result column="video_url" jdbcType="VARCHAR" property="videoUrl" />
-  </resultMap>
-
-  <sql id="CameraToVideo_List">
-    camera_id, camera_adder, camera_number, video_id, video_name, video_url
-  </sql>
-
   <sql id="Base_Column_List">
-    camera_id, camera_adder, camera_number, video_id
+    camera_id, camera_adder, camera_type
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
+    select 
     <include refid="Base_Column_List" />
     from camera
     where camera_id = #{cameraId,jdbcType=INTEGER}
@@ -35,10 +20,10 @@
     where camera_id = #{cameraId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.example.bs.entity.Camera">
-    insert into camera (camera_id, camera_adder, camera_number,
-      video_id)
-    values (#{cameraId,jdbcType=INTEGER}, #{cameraAdder,jdbcType=VARCHAR}, #{cameraNumber,jdbcType=INTEGER},
-      #{videoId,jdbcType=INTEGER})
+    insert into camera (camera_id, camera_adder, camera_type
+      )
+    values (#{cameraId,jdbcType=INTEGER}, #{cameraAdder,jdbcType=VARCHAR}, #{cameraType,jdbcType=BIT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.example.bs.entity.Camera">
     insert into camera
@@ -49,11 +34,8 @@
       <if test="cameraAdder != null">
         camera_adder,
       </if>
-      <if test="cameraNumber != null">
-        camera_number,
-      </if>
-      <if test="videoId != null">
-        video_id,
+      <if test="cameraType != null">
+        camera_type,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -63,11 +45,8 @@
       <if test="cameraAdder != null">
         #{cameraAdder,jdbcType=VARCHAR},
       </if>
-      <if test="cameraNumber != null">
-        #{cameraNumber,jdbcType=INTEGER},
-      </if>
-      <if test="videoId != null">
-        #{videoId,jdbcType=INTEGER},
+      <if test="cameraType != null">
+        #{cameraType,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -77,11 +56,8 @@
       <if test="cameraAdder != null">
         camera_adder = #{cameraAdder,jdbcType=VARCHAR},
       </if>
-      <if test="cameraNumber != null">
-        camera_number = #{cameraNumber,jdbcType=INTEGER},
-      </if>
-      <if test="videoId != null">
-        video_id = #{videoId,jdbcType=INTEGER},
+      <if test="cameraType != null">
+        camera_type = #{cameraType,jdbcType=BIT},
       </if>
     </set>
     where camera_id = #{cameraId,jdbcType=INTEGER}
@@ -89,14 +65,14 @@
   <update id="updateByPrimaryKey" parameterType="com.example.bs.entity.Camera">
     update camera
     set camera_adder = #{cameraAdder,jdbcType=VARCHAR},
-      camera_number = #{cameraNumber,jdbcType=INTEGER},
-      video_id = #{videoId,jdbcType=INTEGER}
+      camera_type = #{cameraType,jdbcType=BIT}
     where camera_id = #{cameraId,jdbcType=INTEGER}
   </update>
 
-  <select id="selectCameraToVideoAll" resultMap="CameraToVideoMap">
+  <select id="selectCameraAll" resultMap="BaseResultMap">
     select
-    a.camera_id, a.camera_adder, a.camera_number, b.video_id, b.video_name, b.video_url
-    from camera a, video b where a.video_id=b.video_id
+    <include refid="Base_Column_List" />
+    from camera
   </select>
+
 </mapper>

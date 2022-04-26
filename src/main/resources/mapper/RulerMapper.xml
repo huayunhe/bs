@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.bs.mapper.RulerMapper">
+  <resultMap id="BaseResultMap" type="com.example.bs.entity.Ruler">
+    <id column="ruler_id" jdbcType="INTEGER" property="rulerId" />
+    <result column="ruler_fortification" jdbcType="DOUBLE" property="rulerFortification" />
+    <result column="ruler_alert" jdbcType="DOUBLE" property="rulerAlert" />
+    <result column="ruler_guarantee" jdbcType="DOUBLE" property="rulerGuarantee" />
+    <result column="ruler_average" jdbcType="DOUBLE" property="rulerAverage" />
+    <result column="camera_id" jdbcType="INTEGER" property="cameraId" />
+  </resultMap>
+  <resultMap id="RulerToCameraMap" type="com.example.bs.core.RulerToCamera">
+    <id column="ruler_id" jdbcType="INTEGER" property="rulerId" />
+    <result column="camera_adder" jdbcType="VARCHAR" property="rulerAdder" />
+    <result column="ruler_fortification" jdbcType="INTEGER" property="rulerFortification" />
+    <result column="ruler_alert" jdbcType="DOUBLE" property="rulerAlert" />
+    <result column="ruler_guarantee" jdbcType="VARCHAR" property="rulerGuarantee" />
+    <result column="ruler_average" jdbcType="DOUBLE" property="rulerAverage" />
+    <result column="camera_id" jdbcType="INTEGER" property="cameraId" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    ruler_id, ruler_fortification, ruler_alert, ruler_guarantee, ruler_average, camera_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from ruler
+    where ruler_id = #{rulerId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ruler
+    where ruler_id = #{rulerId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.bs.entity.Ruler">
+    insert into ruler (ruler_id, ruler_fortification, ruler_alert,
+      ruler_guarantee, ruler_average, camera_id
+      )
+    values (#{rulerId,jdbcType=INTEGER}, #{rulerFortification,jdbcType=DOUBLE}, #{rulerAlert,jdbcType=DOUBLE},
+      #{rulerGuarantee,jdbcType=DOUBLE}, #{rulerAverage,jdbcType=DOUBLE}, #{cameraId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.bs.entity.Ruler">
+    insert into ruler
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rulerId != null">
+        ruler_id,
+      </if>
+      <if test="rulerFortification != null">
+        ruler_fortification,
+      </if>
+      <if test="rulerAlert != null">
+        ruler_alert,
+      </if>
+      <if test="rulerGuarantee != null">
+        ruler_guarantee,
+      </if>
+      <if test="rulerAverage != null">
+        ruler_average,
+      </if>
+      <if test="cameraId != null">
+        camera_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rulerId != null">
+        #{rulerId,jdbcType=INTEGER},
+      </if>
+      <if test="rulerFortification != null">
+        #{rulerFortification,jdbcType=DOUBLE},
+      </if>
+      <if test="rulerAlert != null">
+        #{rulerAlert,jdbcType=DOUBLE},
+      </if>
+      <if test="rulerGuarantee != null">
+        #{rulerGuarantee,jdbcType=DOUBLE},
+      </if>
+      <if test="rulerAverage != null">
+        #{rulerAverage,jdbcType=DOUBLE},
+      </if>
+      <if test="cameraId != null">
+        #{cameraId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.bs.entity.Ruler">
+    update ruler
+    <set>
+      <if test="rulerFortification != null">
+        ruler_fortification = #{rulerFortification,jdbcType=DOUBLE},
+      </if>
+      <if test="rulerAlert != null">
+        ruler_alert = #{rulerAlert,jdbcType=DOUBLE},
+      </if>
+      <if test="rulerGuarantee != null">
+        ruler_guarantee = #{rulerGuarantee,jdbcType=DOUBLE},
+      </if>
+      <if test="rulerAverage != null">
+        ruler_average = #{rulerAverage,jdbcType=DOUBLE},
+      </if>
+      <if test="cameraId != null">
+        camera_id = #{cameraId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ruler_id = #{rulerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.bs.entity.Ruler">
+    update ruler
+    set ruler_fortification = #{rulerFortification,jdbcType=DOUBLE},
+      ruler_alert = #{rulerAlert,jdbcType=DOUBLE},
+      ruler_guarantee = #{rulerGuarantee,jdbcType=DOUBLE},
+      ruler_average = #{rulerAverage,jdbcType=DOUBLE},
+      camera_id = #{cameraId,jdbcType=INTEGER}
+    where ruler_id = #{rulerId,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectRulerToCameraAll" resultMap="RulerToCameraMap">
+    select
+    a.ruler_id, b.camera_adder, a.ruler_fortification, a.ruler_alert, a.ruler_guarantee, a.ruler_average, a.camera_id
+    from ruler a, camera b where a.camera_id=b.camera_id
+  </select>
+</mapper>

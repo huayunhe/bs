@@ -1,8 +1,9 @@
 package com.example.bs.controller;
 
 import com.example.bs.core.Result;
-import com.example.bs.entity.Video;
-import com.example.bs.service.VideoService;
+import com.example.bs.core.VideoFloaterToCamera;
+import com.example.bs.entity.VideoFloater;
+import com.example.bs.service.VideoFloaterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,17 +11,17 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/video")
-public class VideoController {
+@RequestMapping("/videoFloater")
+public class VideoFloaterController {
     @Autowired
-    private VideoService videoService;
+    private VideoFloaterService videoFloaterService;
 
     @GetMapping("/selectAll")
     @ResponseBody
     public Result selectAll(){
         Result result = new Result();
-        List<Video> existVideo=videoService.selectAll();
-        result.setData(existVideo);
+        List<VideoFloaterToCamera> existVideoFloater=videoFloaterService.selectAll();
+        result.setData(existVideoFloater);
         return result;
     }
 

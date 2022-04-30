@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface VideoFloaterService {
     List<VideoFloaterToCamera> selectAll();
+    int add(VideoFloater row) throws Exception;
 }

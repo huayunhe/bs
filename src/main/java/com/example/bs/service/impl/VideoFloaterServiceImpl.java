@@ -20,4 +20,15 @@ public class VideoFloaterServiceImpl implements VideoFloaterService {
     public List<VideoFloaterToCamera> selectAll(){
         return videoFloaterMapper.selectAll();
     }
+
+    @Override
+    public int add(VideoFloater row) throws Exception {
+        try{
+            return videoFloaterMapper.insert(row);
+        }
+        catch (Exception e){
+            throw new Exception("视频编号重复");
+        }
+
+    }
 }

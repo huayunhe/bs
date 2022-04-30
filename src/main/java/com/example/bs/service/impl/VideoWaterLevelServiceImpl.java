@@ -21,4 +21,8 @@ public class VideoWaterLevelServiceImpl implements VideoWaterLevelService {
         return videoWaterLevelMapper.selectAll();
     }
 
+    @Override
+    public int add(VideoWaterLevel row) {
+        return videoWaterLevelMapper.insert(row);
+    }
 }

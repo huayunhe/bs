@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface VideoWaterLevelService {
     List<VideoWaterLevelToCameraAndRuler> selectAll();
+    int add(VideoWaterLevel row);
 }
